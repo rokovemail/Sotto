@@ -227,7 +227,11 @@
 
             <div class="address-box" id="t-address">📍 Cetinska cesta 32, 21310, Omiš</div>
 
-            <a href="https://www.instagram.com/pizzeriasotto/" class="ig-link" target="_blank" id="t-ig-follow">Follow us on Instagram</a>
+            <a href="https://www.instagram.com/pizzeriasotto/" target="_blank" class="footer-ig-icon" aria-label="Instagram" id="t-ig-follow">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm0 1.9A3.9 3.9 0 0 0 3.9 7.8v8.4a3.9 3.9 0 0 0 3.9 3.9h8.4a3.9 3.9 0 0 0 3.9-3.9V7.8a3.9 3.9 0 0 0-3.9-3.9H7.8zm8.9 1.4a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.9a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2z"></path>
+                </svg>
+            </a>
         </div>
         <div class="scroll-down">↓</div>
     </section>
@@ -303,7 +307,7 @@
             en: {
                 heroSubtitle: "Where great food, good vibes, and seaside energy come together.<br>Welcome to your new favorite hangout.",
                 address: "📍 Cetinska cesta 32, 21310, Omiš",
-                igFollow: "Follow us on Instagram",
+                igFollow: "Instagram",
                 menuTitle: "Our Menu",
                 menuDesc: "From quick snacks to satisfying plates, explore what we’re serving.",
                 menuBtn: "View Full Menu (PDF)",
@@ -322,7 +326,7 @@
             hr: {
                 heroSubtitle: "Mjesto gdje se sjajna hrana, dobra vibra i morska energija spajaju.<br>Dobrodošli na svoje novo omiljeno mjesto.",
                 address: "📍 Cetinska cesta 32, 21310, Omiš",
-                igFollow: "Pratite nas na Instagramu",
+                igFollow: "Instagram",
                 menuTitle: "Jelovnik",
                 menuDesc: "Istražite našu modernu ponudu hrane i pića.",
                 menuBtn: "Pogledaj cijeli jelovnik (PDF)",
@@ -347,7 +351,7 @@
             document.documentElement.lang = lang;
             document.getElementById("t-hero-subtitle").innerHTML = t.heroSubtitle;
             document.getElementById("t-address").textContent = t.address;
-            document.getElementById("t-ig-follow").textContent = t.igFollow;
+            document.getElementById("t-ig-follow").setAttribute("aria-label", t.igFollow);
             document.getElementById("t-menu-title").textContent = t.menuTitle;
             document.getElementById("t-menu-desc").textContent = t.menuDesc;
             document.getElementById("t-menu-btn").textContent = t.menuBtn;
