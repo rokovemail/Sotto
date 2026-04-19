@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street food bar SOTTO</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET & VARIABLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --deep-blue: #1D2D44;
+            --dark-grey: #121619;
+            --text-light: #F0F4F8;
+            --accent-color: #3E5C76;
+            --overlay: rgba(18, 22, 25, 0.75); /* Dark grey/blue overlay for images */
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-light);
+            background-color: var(--dark-grey);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+
+        /* LANGUAGE SELECTOR */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        /* SECTION STYLING (The Basta Bar layout style) */
+        section {
+            height: 100vh; /* Fills the exact height of the mobile screen */
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+        }
+
+        /* Dark overlay to make text readable over images */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, var(--overlay), rgba(29, 45, 68, 0.8));
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2; /* Puts text above the overlay */
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        #hero { background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop'); }
+        .hero-title { font-size: 3rem; font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; }
+        .hero-subtitle { font-size: 1.2rem; font-weight: 300; margin-bottom: 30px; font-style: italic; }
+        .address-box { margin-bottom: 20px; font-size: 1rem; color: #ccc; }
+        
+        /* BUTTONS & LINKS */
+        .btn {
+            display: inline-block;
+            background-color: var(--deep-blue);
+            color: white;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 30px;
+            border: 2px solid var(--accent-color);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn:hover { background-color: var(--accent-color); transform: scale(1.05); }
+        .ig-link { color: white; text-decoration: none; font-size: 1rem; margin-top: 20px; display: inline-block; border-bottom: 1px solid white; padding-bottom: 2px; }
+
+        /* MENU SECTION */
+        #menu { background-image: url('https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=1600&auto=format&fit=crop'); }
+        #menu h2 { font-size: 2.5rem; margin-bottom: 20px; }
+
+        /* LOCATION SECTION */
+        #location { background-color: var(--dark-grey); height: 100vh; }
+        .map-container { width: 100%; max-width: 600px; height: 350px; border-radius: 15px; overflow: hidden; margin: 20px 0; border: 2px solid var(--deep-blue); }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* GALLERY SECTION */
+        #gallery { background-color: var(--dark-grey); display: block; height: auto; min-height: 100vh; padding: 60px 0; }
+        #gallery h2 { margin-bottom: 30px; text-align: center; }
+        
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            padding: 0 20px;
+            /* Hides scrollbar for clean look */
+            -ms-overflow-style: none;  
+            scrollbar-width: none;  
+        }
+        .carousel::-webkit-scrollbar { display: none; }
+        
+        .carousel img {
+            height: 350px;
+            width: 280px;
+            object-fit: cover;
+            border-radius: 10px;
+            scroll-snap-align: center;
+            flex-shrink: 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* FOOTER SECTION */
+        #footer { background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1600&auto=format&fit=crop'); }
+        .working-hours { margin: 25px 0; font-size: 1.1rem; line-height: 1.8; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; }
+
+        /* SCROLL DOWN INDICATOR */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: bounce 2s infinite;
+            font-size: 24px;
+            color: rgba(255,255,255,0.7);
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
+
+        /* MOBILE TWEAKS */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .carousel img { width: 85vw; height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switch" onclick="alert('Language translation logic will go here!')">
+        🌐 EN
+    </div>
+
+    <section id="hero">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1 class="hero-title">SOTTO</h1>
+            <p class="hero-subtitle">Gourmet taste with a street food soul.<br>Welcome to your new favorite hangout.</p>
+            
+            <div class="address-box">
+                📍 Cetinska cesta 32, 21310, Omiš
+            </div>
+
+            <a href="#" class="ig-link" target="_blank">Follow us on Instagram</a>
+        </div>
+        <div class="scroll-down">↓</div>
+    </section>
+
+    <section id="menu">
+        <div class="overlay"></div>
+        <div class="content">
+            <h2>Our Menu</h2>
+            <p style="margin-bottom: 30px; font-weight: 300;">Explore our modern street food offerings.</p>
+            
+            <a href="menu.pdf" target="_blank" class="btn">View Full Menu (PDF)</a>
+        </div>
+        <div class="scroll-down">↓</div>
+    </section>
+
+    <section id="location">
+        <div class="content" style="display: flex; flex-direction: column; align-items: center;">
+            <h2>Find Us</h2>
+            <p>Cetinska cesta 32, 21310, Omiš</p>
+            
+            <div class="map-container">
+                <iframe src="https://maps.google.com/maps?q=Cetinska%20cesta%2032,%2021310,%20Omi%C5%A1&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #888;">Swipe to view</p>
+        
+        <div class="carousel" id="auto-carousel">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 1">
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 2">
+            <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 3">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 4">
+            <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 5">
+        </div>
+    </section>
+
+    <section id="footer">
+        <div class="overlay"></div>
+        <div class="content">
+            <h2>SOTTO</h2>
+            <p style="font-style: italic;">Gourmet taste with a street food soul.</p>
+            
+            <div class="working-hours">
+                <strong>Working Hours</strong><br>
+                Mon - Thu: 12:00 - 23:00<br>
+                Fri - Sun: 12:00 - 01:00
+            </div>
+            
+            <a href="#" class="btn" style="padding: 10px 25px; font-size: 0.9rem; border-radius: 10px;">Instagram</a>
+            <p style="margin-top: 30px; font-size: 0.8rem; color: #888;">© 2024 Street food bar SOTTO. All rights reserved.</p>
+        </div>
+    </section>
+
+    <script>
+        const carousel = document.getElementById('auto-carousel');
+        let scrollAmount = 0;
+        
+        // Auto scroll script. Pauses if user touches it.
+        let scrollInterval = setInterval(() => {
+            carousel.scrollBy({ left: 2, behavior: 'smooth' });
+            // Reset to start if it hits the end
+            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1) {
+                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+            }
+        }, 50);
+
+        // Stop auto-scrolling when the user touches or hovers the gallery
+        carousel.addEventListener('touchstart', () => clearInterval(scrollInterval));
+        carousel.addEventListener('mouseenter', () => clearInterval(scrollInterval));
+    </script>
+
+</body>
+</html>
