@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Street food bar SOTTO</title>
-    
+    <title>Pizzeria Bar SOTTO</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    
+
     <style>
-        /* CSS RESET & VARIABLES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         :root {
             --deep-blue: #1D2D44;
             --dark-grey: #121619;
             --text-light: #F0F4F8;
             --accent-color: #3E5C76;
-            --overlay: rgba(18, 22, 25, 0.75); /* Dark grey/blue overlay for images */
+            --overlay: rgba(18, 22, 25, 0.75);
         }
 
         body {
@@ -27,32 +26,50 @@
             scroll-behavior: smooth;
         }
 
-        h1, h2, h3 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
 
-        /* LANGUAGE SELECTOR */
         .lang-switch {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 100;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             padding: 8px 12px;
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .lang-switch button {
+            background: transparent;
+            border: none;
             color: white;
             font-size: 14px;
             cursor: pointer;
-            backdrop-filter: blur(5px);
-        }
-        .lang-switch.disabled {
-            pointer-events: none;
-            cursor: not-allowed;
-            opacity: 0.9;
+            padding: 0 4px;
+            font-family: inherit;
         }
 
-        /* SECTION STYLING (The Basta Bar layout style) */
+        .lang-switch button.active {
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .lang-switch .divider {
+            opacity: 0.5;
+            margin: 0 2px;
+        }
+
         section {
-            height: 100vh; /* Fills the exact height of the mobile screen */
+            height: 100vh;
             width: 100vw;
             display: flex;
             flex-direction: column;
@@ -65,33 +82,67 @@
             padding: 20px;
         }
 
-        /* Dark overlay to make text readable over images */
         .overlay {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: linear-gradient(to bottom, var(--overlay), rgba(29, 45, 68, 0.8));
             z-index: 1;
         }
 
         .content {
             position: relative;
-            z-index: 2; /* Puts text above the overlay */
+            z-index: 2;
             max-width: 800px;
             width: 100%;
         }
 
-        /* HERO SECTION */
         #hero { background-image: url('PageImages/SottoMain.jpg'); }
         .hero-title { font-size: 3rem; font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; }
         .hero-subtitle { font-size: 1.2rem; font-weight: 300; margin-bottom: 30px; font-style: italic; }
         .address-box { margin-bottom: 20px; font-size: 1rem; color: #ccc; }
 
-        /* SEASIDE SECTION */
+        #menu { background-image: url('https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=1600&auto=format&fit=crop'); }
+        #menu h2 { font-size: 2.5rem; margin-bottom: 20px; }
+
+        #location { background-color: var(--dark-grey); height: 100vh; }
+        .map-container { width: 100%; max-width: 600px; height: 350px; border-radius: 15px; overflow: hidden; margin: 20px 0; border: 2px solid var(--deep-blue); }
+        iframe { width: 100%; height: 100%; border: none; }
+
         #seaside { background-image: url('PageImages/SottoOut.jpg'); }
         #seaside h2 { font-size: 2.3rem; margin-bottom: 20px; }
         #seaside p { font-size: 1.05rem; line-height: 1.8; max-width: 900px; margin: 0 auto; }
-        
-        /* BUTTONS & LINKS */
+
+        #gallery { background-color: var(--dark-grey); display: block; height: auto; min-height: 100vh; padding: 60px 0; }
+        #gallery h2 { margin-bottom: 30px; text-align: center; }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            padding: 0 20px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .carousel::-webkit-scrollbar { display: none; }
+
+        .carousel img {
+            height: 350px;
+            width: 280px;
+            object-fit: cover;
+            border-radius: 10px;
+            scroll-snap-align: center;
+            flex-shrink: 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #footer { background-image: url('PageImages/SottoInside.jpg'); }
+        .working-hours { margin: 25px 0; font-size: 1.1rem; line-height: 1.8; background: rgba(0, 0, 0, 0.4); padding: 15px; border-radius: 10px; }
+
         .btn {
             display: inline-block;
             background-color: var(--deep-blue);
@@ -107,49 +158,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         .btn:hover { background-color: var(--accent-color); transform: scale(1.05); }
         .ig-link { color: white; text-decoration: none; font-size: 1rem; margin-top: 20px; display: inline-block; border-bottom: 1px solid white; padding-bottom: 2px; }
 
-        /* MENU SECTION */
-        #menu { background-image: url('https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=1600&auto=format&fit=crop'); }
-        #menu h2 { font-size: 2.5rem; margin-bottom: 20px; }
-
-        /* LOCATION SECTION */
-        #location { background-color: var(--dark-grey); height: 100vh; }
-        .map-container { width: 100%; max-width: 600px; height: 350px; border-radius: 15px; overflow: hidden; margin: 20px 0; border: 2px solid var(--deep-blue); }
-        iframe { width: 100%; height: 100%; border: none; }
-
-        /* GALLERY SECTION */
-        #gallery { background-color: var(--dark-grey); display: block; height: auto; min-height: 100vh; padding: 60px 0; }
-        #gallery h2 { margin-bottom: 30px; text-align: center; }
-        
-        .carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 15px;
-            padding: 0 20px;
-            /* Hides scrollbar for clean look */
-            -ms-overflow-style: none;  
-            scrollbar-width: none;  
-        }
-        .carousel::-webkit-scrollbar { display: none; }
-        
-        .carousel img {
-            height: 350px;
-            width: 280px;
-            object-fit: cover;
-            border-radius: 10px;
-            scroll-snap-align: center;
-            flex-shrink: 0;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
-        /* FOOTER SECTION */
-        #footer { background-image: url('PageImages/SottoInside.jpg'); }
-        .working-hours { margin: 25px 0; font-size: 1.1rem; line-height: 1.8; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; }
-
-        /* SCROLL DOWN INDICATOR */
         .scroll-down {
             position: absolute;
             bottom: 30px;
@@ -158,15 +170,15 @@
             z-index: 10;
             animation: bounce 2s infinite;
             font-size: 24px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
         }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
             40% { transform: translateY(-15px) translateX(-50%); }
             60% { transform: translateY(-7px) translateX(-50%); }
         }
 
-        /* MOBILE TWEAKS */
         @media (max-width: 768px) {
             .hero-title { font-size: 2.2rem; }
             .hero-subtitle { font-size: 1rem; }
@@ -176,41 +188,42 @@
 </head>
 <body>
 
-    <div class="lang-switch disabled" aria-disabled="true" title="Language switch coming soon">
-        &#127760; EN
+    <div class="lang-switch" title="Language">
+        <span aria-hidden="true">🌐</span>
+        <button id="lang-en" type="button" class="active">EN</button>
+        <span class="divider">|</span>
+        <button id="lang-hr" type="button">HR</button>
     </div>
 
     <section id="hero">
         <div class="overlay"></div>
         <div class="content">
             <h1 class="hero-title">SOTTO</h1>
-            <p class="hero-subtitle">Where great food, good vibes, and seaside energy come together.<br>Welcome to your new favorite hangout.</p>
-            
-            <div class="address-box">
-                📍 Cetinska cesta 32, 21310, Omiš
-            </div>
+            <p class="hero-subtitle" id="t-hero-subtitle">Where great food, good vibes, and seaside energy come together.<br>Welcome to your new favorite hangout.</p>
 
-            <a href="https://www.instagram.com/pizzeriasotto/" class="ig-link" target="_blank">Follow us on Instagram</a>
+            <div class="address-box" id="t-address">📍 Cetinska cesta 32, 21310, Omiš</div>
+
+            <a href="https://www.instagram.com/pizzeriasotto/" class="ig-link" target="_blank" id="t-ig-follow">Follow us on Instagram</a>
         </div>
         <div class="scroll-down">↓</div>
     </section>
 
-<section id="menu">
+    <section id="menu">
         <div class="overlay"></div>
         <div class="content">
-            <h2>Our Menu</h2>
-            <p style="margin-bottom: 30px; font-weight: 300;">Explore our modern street food offerings.</p>
-            
-            <a href="Jelovnik_novi.pdf" target="_blank" class="btn">View Full Menu (PDF)</a>
+            <h2 id="t-menu-title">Our Menu</h2>
+            <p style="margin-bottom: 30px; font-weight: 300;" id="t-menu-desc">From quick snacks to satisfying plates, explore what we’re serving.</p>
+
+            <a href="Jelovnik_novi.pdf" target="_blank" class="btn" id="t-menu-btn">View Full Menu (PDF)</a>
         </div>
         <div class="scroll-down">↓</div>
     </section>
 
     <section id="location">
         <div class="content" style="display: flex; flex-direction: column; align-items: center;">
-            <h2>Find Us</h2>
-            <p>Cetinska cesta 32, 21310, Omiš</p>
-            
+            <h2 id="t-find-us">Find Us</h2>
+            <p id="t-location-address">Cetinska cesta 32, 21310, Omiš</p>
+
             <div class="map-container">
                 <iframe src="https://maps.google.com/maps?q=Cetinska%20cesta%2032,%2021310,%20Omi%C5%A1&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -220,16 +233,16 @@
     <section id="seaside">
         <div class="overlay"></div>
         <div class="content">
-            <h2>Your Seaside Escape Begins Here</h2>
-            <p>Nestled at the mouth of the Cetina River, our breezy terrace invites you to savor vibrant Dalmatian flavors with stunning views of the historic Mirabella Fortress. Whether it's a sunset glass of wine or a relaxed meal with loved ones, discover your perfect seaside escape for great food and pure enjoyment.</p>
+            <h2 id="t-seaside-title">Your Seaside Escape Begins Here</h2>
+            <p id="t-seaside-desc">Nestled at the mouth of the Cetina River, our breezy terrace invites you to savor vibrant Dalmatian flavors with stunning views of the historic Mirabella Fortress. Whether it's a sunset glass of wine or a relaxed meal with loved ones, discover your perfect seaside escape for great food and pure enjoyment.</p>
         </div>
-        <div class="scroll-down">&#8595;</div>
+        <div class="scroll-down">↓</div>
     </section>
 
     <section id="gallery">
-        <h2>Gallery</h2>
-        <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #888;">Swipe to view</p>
-        
+        <h2 id="t-gallery-title">Gallery</h2>
+        <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #888;" id="t-gallery-swipe">Swipe to view</p>
+
         <div class="carousel" id="auto-carousel">
             <img src="GalleryImages/0221fe02-07a8-4e18-85e4-3cb89fbbde1f.jpg" alt="Gallery Image 1">
             <img src="GalleryImages/499b461e-13b5-4f9d-9f31-e119806ac7f8.jpg" alt="Gallery Image 2">
@@ -244,20 +257,89 @@
         <div class="overlay"></div>
         <div class="content">
             <h2>SOTTO</h2>
-            <p style="font-style: italic;">Great food, good vibes, and a view worth staying for.</p>
-            
+            <p style="font-style: italic;" id="t-footer-tagline">Great food, good vibes, and a view worth staying for.</p>
+
             <div class="working-hours">
-                <strong>Working Hours</strong><br>
-                Mon - Sun: 12:00 - 23:00
+                <strong id="t-hours-title">Working Hours</strong><br>
+                <span id="t-hours-value">Mon - Sun: 12:00 - 23:00</span>
             </div>
-            
-            <a href="https://www.instagram.com/pizzeriasotto/" target="_blank" class="btn" style="padding: 10px 25px; font-size: 0.9rem; border-radius: 10px;">Instagram</a>
-            <p style="margin-top: 30px; font-size: 0.8rem; color: #888;">© 2026 Street food bar SOTTO. All rights reserved.</p>
+
+            <a href="https://www.instagram.com/pizzeriasotto/" target="_blank" class="btn" style="padding: 10px 25px; font-size: 0.9rem; border-radius: 10px;" id="t-footer-ig">Instagram</a>
+            <p style="margin-top: 30px; font-size: 0.8rem; color: #888;" id="t-copyright">© 2026 Street food bar SOTTO. All rights reserved.</p>
         </div>
     </section>
 
     <script>
-        // Gallery is manual-only (swipe/drag/scroll) to avoid flicker.
+        const translations = {
+            en: {
+                heroSubtitle: "Where great food, good vibes, and seaside energy come together.<br>Welcome to your new favorite hangout.",
+                address: "📍 Cetinska cesta 32, 21310, Omiš",
+                igFollow: "Follow us on Instagram",
+                menuTitle: "Our Menu",
+                menuDesc: "From quick snacks to satisfying plates, explore what we’re serving.",
+                menuBtn: "View Full Menu (PDF)",
+                findUs: "Find Us",
+                locationAddress: "Cetinska cesta 32, 21310, Omiš",
+                seasideTitle: "Your Seaside Escape Begins Here",
+                seasideDesc: "Nestled at the mouth of the Cetina River, our breezy terrace invites you to savor vibrant Dalmatian flavors with stunning views of the historic Mirabella Fortress. Whether it's a sunset glass of wine or a relaxed meal with loved ones, discover your perfect seaside escape for great food and pure enjoyment.",
+                galleryTitle: "Gallery",
+                gallerySwipe: "Swipe to view",
+                footerTagline: "Great food, good vibes, and a view worth staying for.",
+                hoursTitle: "Working Hours",
+                hoursValue: "Mon - Sun: 12:00 - 23:00",
+                footerIg: "Instagram",
+                copyright: "© 2026 Street food bar SOTTO. All rights reserved."
+            },
+            hr: {
+                heroSubtitle: "Mjesto gdje se sjajna hrana, dobra vibra i morska energija spajaju.<br>Dobrodošli na svoje novo omiljeno mjesto.",
+                address: "📍 Cetinska cesta 32, 21310, Omiš",
+                igFollow: "Pratite nas na Instagramu",
+                menuTitle: "Jelovnik",
+                menuDesc: "Istražite našu modernu ponudu hrane i pića.",
+                menuBtn: "Pogledaj cijeli jelovnik (PDF)",
+                findUs: "Pronađite nas",
+                locationAddress: "Cetinska cesta 32, 21310, Omiš",
+                seasideTitle: "Vaš bijeg uz more počinje ovdje",
+                seasideDesc: "Smještena na ušću rijeke Cetine, naša prozračna terasa poziva vas da uživate u živim dalmatinskim okusima uz prekrasan pogled na povijesnu tvrđavu Mirabela. Bilo da je riječ o čaši vina u zalazak sunca ili opuštenom obroku s najmilijima, ovdje ćete pronaći svoj savršeni morski kutak za odličnu hranu i čisti užitak.",
+                galleryTitle: "Galerija",
+                gallerySwipe: "Povucite za pregled",
+                footerTagline: "Odlična hrana, dobra vibra i pogled zbog kojeg poželite ostati.",
+                hoursTitle: "Radno vrijeme",
+                hoursValue: "Pon - Ned: 12:00 - 23:00",
+                footerIg: "Instagram",
+                copyright: "© 2026 Street food bar SOTTO. Sva prava pridržana."
+            }
+        };
+
+        function setLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            document.documentElement.lang = lang;
+            document.getElementById("t-hero-subtitle").innerHTML = t.heroSubtitle;
+            document.getElementById("t-address").textContent = t.address;
+            document.getElementById("t-ig-follow").textContent = t.igFollow;
+            document.getElementById("t-menu-title").textContent = t.menuTitle;
+            document.getElementById("t-menu-desc").textContent = t.menuDesc;
+            document.getElementById("t-menu-btn").textContent = t.menuBtn;
+            document.getElementById("t-find-us").textContent = t.findUs;
+            document.getElementById("t-location-address").textContent = t.locationAddress;
+            document.getElementById("t-seaside-title").textContent = t.seasideTitle;
+            document.getElementById("t-seaside-desc").textContent = t.seasideDesc;
+            document.getElementById("t-gallery-title").textContent = t.galleryTitle;
+            document.getElementById("t-gallery-swipe").textContent = t.gallerySwipe;
+            document.getElementById("t-footer-tagline").textContent = t.footerTagline;
+            document.getElementById("t-hours-title").textContent = t.hoursTitle;
+            document.getElementById("t-hours-value").textContent = t.hoursValue;
+            document.getElementById("t-footer-ig").textContent = t.footerIg;
+            document.getElementById("t-copyright").textContent = t.copyright;
+
+            document.getElementById("lang-en").classList.toggle("active", lang === "en");
+            document.getElementById("lang-hr").classList.toggle("active", lang === "hr");
+        }
+
+        document.getElementById("lang-en").addEventListener("click", () => setLanguage("en"));
+        document.getElementById("lang-hr").addEventListener("click", () => setLanguage("hr"));
     </script>
 
 </body>
