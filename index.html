@@ -137,6 +137,33 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        .carousel-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 52px;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            background: rgba(18, 22, 25, 0.7);
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 3;
+        }
+        .carousel-btn:hover { background: rgba(62, 92, 118, 0.95); }
+        .carousel-btn.prev { left: 8px; }
+        .carousel-btn.next { right: 8px; }
 
         .carousel::-webkit-scrollbar { display: none; }
 
@@ -209,6 +236,8 @@
             .hero-title { font-size: 3.25rem; }
             .hero-subtitle { font-size: 1.3rem; }
             .carousel img { width: 85vw; height: 400px; }
+            .carousel-wrap { padding: 0 20px; }
+            .carousel-btn { display: none; }
         }
     </style>
 </head>
@@ -273,18 +302,22 @@
         <h2 id="t-gallery-title">Gallery</h2>
         <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #888;" id="t-gallery-swipe">Swipe to view</p>
 
-        <div class="carousel" id="auto-carousel">
-            <img src="GalleryImages/0221fe02-07a8-4e18-85e4-3cb89fbbde1f.jpg" alt="Gallery Image 1">
-            <img src="GalleryImages/499b461e-13b5-4f9d-9f31-e119806ac7f8.jpg" alt="Gallery Image 2">
-            <img src="GalleryImages/7494f7f2-a359-45a1-a8e9-fbb9b6559ab5.jpg" alt="Gallery Image 3">
-            <img src="GalleryImages/cff8ce11-90cb-4ce3-af33-7d947812ce4c.jpg" alt="Gallery Image 4">
-            <img src="GalleryImages/deebd735-d2b4-4a12-a0ac-8d1f92f267e2.jpg" alt="Gallery Image 5">
-            <img src="GalleryImages/e13dab59-d64c-4485-899c-3732d0b533e6.jpg" alt="Gallery Image 6">
-            <img src="GalleryImages/Sotto2.jpg" alt="Gallery Image 7">
-            <img src="GalleryImages/Sotto3.jpg" alt="Gallery Image 8">
-            <img src="GalleryImages/Sotto4.jpg" alt="Gallery Image 9">
-            <img src="GalleryImages/Sotto5.jpg" alt="Gallery Image 10">
-            <img src="GalleryImages/sotto7.jpg" alt="Gallery Image 11">
+        <div class="carousel-wrap">
+            <button class="carousel-btn prev" id="gallery-prev" type="button" aria-label="Previous image">&#8592;</button>
+            <div class="carousel" id="auto-carousel">
+                <img src="GalleryImages/0221fe02-07a8-4e18-85e4-3cb89fbbde1f.jpg" alt="Gallery Image 1">
+                <img src="GalleryImages/499b461e-13b5-4f9d-9f31-e119806ac7f8.jpg" alt="Gallery Image 2">
+                <img src="GalleryImages/7494f7f2-a359-45a1-a8e9-fbb9b6559ab5.jpg" alt="Gallery Image 3">
+                <img src="GalleryImages/cff8ce11-90cb-4ce3-af33-7d947812ce4c.jpg" alt="Gallery Image 4">
+                <img src="GalleryImages/deebd735-d2b4-4a12-a0ac-8d1f92f267e2.jpg" alt="Gallery Image 5">
+                <img src="GalleryImages/e13dab59-d64c-4485-899c-3732d0b533e6.jpg" alt="Gallery Image 6">
+                <img src="GalleryImages/Sotto2.jpg" alt="Gallery Image 7">
+                <img src="GalleryImages/Sotto3.jpg" alt="Gallery Image 8">
+                <img src="GalleryImages/Sotto4.jpg" alt="Gallery Image 9">
+                <img src="GalleryImages/Sotto5.jpg" alt="Gallery Image 10">
+                <img src="GalleryImages/sotto7.jpg" alt="Gallery Image 11">
+            </div>
+            <button class="carousel-btn next" id="gallery-next" type="button" aria-label="Next image">&#8594;</button>
         </div>
     </section>
 
@@ -380,6 +413,13 @@
 
         document.getElementById("lang-en").addEventListener("click", () => setLanguage("en"));
         document.getElementById("lang-hr").addEventListener("click", () => setLanguage("hr"));
+
+        const gallery = document.getElementById("auto-carousel");
+        const prevBtn = document.getElementById("gallery-prev");
+        const nextBtn = document.getElementById("gallery-next");
+        const step = 320;
+        prevBtn.addEventListener("click", () => gallery.scrollBy({ left: -step, behavior: "smooth" }));
+        nextBtn.addEventListener("click", () => gallery.scrollBy({ left: step, behavior: "smooth" }));
     </script>
 
 </body>
