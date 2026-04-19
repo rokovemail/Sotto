@@ -44,6 +44,11 @@
             cursor: pointer;
             backdrop-filter: blur(5px);
         }
+        .lang-switch.disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
 
         /* SECTION STYLING (The Basta Bar layout style) */
         section {
@@ -76,10 +81,15 @@
         }
 
         /* HERO SECTION */
-        #hero { background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop'); }
+        #hero { background-image: url('PageImages/SottoMain.jpg'); }
         .hero-title { font-size: 3rem; font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; }
         .hero-subtitle { font-size: 1.2rem; font-weight: 300; margin-bottom: 30px; font-style: italic; }
         .address-box { margin-bottom: 20px; font-size: 1rem; color: #ccc; }
+
+        /* SEASIDE SECTION */
+        #seaside { background-image: url('PageImages/SottoOut.jpg'); }
+        #seaside h2 { font-size: 2.3rem; margin-bottom: 20px; }
+        #seaside p { font-size: 1.05rem; line-height: 1.8; max-width: 900px; margin: 0 auto; }
         
         /* BUTTONS & LINKS */
         .btn {
@@ -136,7 +146,7 @@
         }
 
         /* FOOTER SECTION */
-        #footer { background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1600&auto=format&fit=crop'); }
+        #footer { background-image: url('PageImages/SottoInside.jpg'); }
         .working-hours { margin: 25px 0; font-size: 1.1rem; line-height: 1.8; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 10px; }
 
         /* SCROLL DOWN INDICATOR */
@@ -166,32 +176,32 @@
 </head>
 <body>
 
-    <div class="lang-switch" onclick="alert('Language translation logic will go here!')">
-        🌐 EN
+    <div class="lang-switch disabled" aria-disabled="true" title="Language switch coming soon">
+        &#127760; EN
     </div>
 
     <section id="hero">
         <div class="overlay"></div>
         <div class="content">
             <h1 class="hero-title">SOTTO</h1>
-            <p class="hero-subtitle">Gourmet taste with a street food soul.<br>Welcome to your new favorite hangout.</p>
+            <p class="hero-subtitle">More than a meal - it’s the SOTTO experience.</p>
             
             <div class="address-box">
                 📍 Cetinska cesta 32, 21310, Omiš
             </div>
 
-            <a href="#" class="ig-link" target="_blank">Follow us on Instagram</a>
+            <a href="https://www.instagram.com/pizzeriasotto/" class="ig-link" target="_blank">Follow us on Instagram</a>
         </div>
         <div class="scroll-down">↓</div>
     </section>
 
-    <section id="menu">
+<section id="menu">
         <div class="overlay"></div>
         <div class="content">
             <h2>Our Menu</h2>
             <p style="margin-bottom: 30px; font-weight: 300;">Explore our modern street food offerings.</p>
             
-            <a href="menu.pdf" target="_blank" class="btn">View Full Menu (PDF)</a>
+            <a href="Jelovnik_novi.pdf" target="_blank" class="btn">View Full Menu (PDF)</a>
         </div>
         <div class="scroll-down">↓</div>
     </section>
@@ -207,16 +217,26 @@
         </div>
     </section>
 
+    <section id="seaside">
+        <div class="overlay"></div>
+        <div class="content">
+            <h2>Your Seaside Escape Begins Here</h2>
+            <p>Nestled at the mouth of the Cetina River, our breezy terrace invites you to savor vibrant Dalmatian flavors with stunning views of the historic Mirabella Fortress. Whether it's a sunset glass of wine or a relaxed meal with loved ones, discover your perfect seaside escape for great food and pure enjoyment.</p>
+        </div>
+        <div class="scroll-down">&#8595;</div>
+    </section>
+
     <section id="gallery">
         <h2>Gallery</h2>
         <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem; color: #888;">Swipe to view</p>
         
         <div class="carousel" id="auto-carousel">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 1">
-            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 2">
-            <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 3">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 4">
-            <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?q=80&w=800&auto=format&fit=crop" alt="Gallery Image 5">
+            <img src="GalleryImages/0221fe02-07a8-4e18-85e4-3cb89fbbde1f.jpg" alt="Gallery Image 1">
+            <img src="GalleryImages/499b461e-13b5-4f9d-9f31-e119806ac7f8.jpg" alt="Gallery Image 2">
+            <img src="GalleryImages/7494f7f2-a359-45a1-a8e9-fbb9b6559ab5.jpg" alt="Gallery Image 3">
+            <img src="GalleryImages/cff8ce11-90cb-4ce3-af33-7d947812ce4c.jpg" alt="Gallery Image 4">
+            <img src="GalleryImages/deebd735-d2b4-4a12-a0ac-8d1f92f267e2.jpg" alt="Gallery Image 5">
+            <img src="GalleryImages/e13dab59-d64c-4485-899c-3732d0b533e6.jpg" alt="Gallery Image 6">
         </div>
     </section>
 
@@ -228,12 +248,11 @@
             
             <div class="working-hours">
                 <strong>Working Hours</strong><br>
-                Mon - Thu: 12:00 - 23:00<br>
-                Fri - Sun: 12:00 - 01:00
+                Mon - Sun: 12:00 - 23:00
             </div>
             
-            <a href="#" class="btn" style="padding: 10px 25px; font-size: 0.9rem; border-radius: 10px;">Instagram</a>
-            <p style="margin-top: 30px; font-size: 0.8rem; color: #888;">© 2024 Street food bar SOTTO. All rights reserved.</p>
+            <a href="https://www.instagram.com/pizzeriasotto/" target="_blank" class="btn" style="padding: 10px 25px; font-size: 0.9rem; border-radius: 10px;">Instagram</a>
+            <p style="margin-top: 30px; font-size: 0.8rem; color: #888;">© 2026 Street food bar SOTTO. All rights reserved.</p>
         </div>
     </section>
 
