@@ -257,21 +257,7 @@
     </section>
 
     <script>
-        const carousel = document.getElementById('auto-carousel');
-        let scrollAmount = 0;
-        
-        // Auto scroll script. Pauses if user touches it.
-        let scrollInterval = setInterval(() => {
-            carousel.scrollBy({ left: 2, behavior: 'smooth' });
-            // Reset to start if it hits the end
-            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1) {
-                carousel.scrollTo({ left: 0, behavior: 'smooth' });
-            }
-        }, 50);
-
-        // Stop auto-scrolling when the user touches or hovers the gallery
-        carousel.addEventListener('touchstart', () => clearInterval(scrollInterval));
-        carousel.addEventListener('mouseenter', () => clearInterval(scrollInterval));
+        // Gallery is manual-only (swipe/drag/scroll) to avoid flicker.
     </script>
 
 </body>
